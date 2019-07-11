@@ -1,0 +1,96 @@
+body.overlay {
+	padding-top: 50px;
+}
+
+#app {
+	height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main {
+	display: block;
+}
+
+.button {
+	background-color: #FF5722 !important;
+}
+
+.toast {
+	background-color: #FF5722;
+}
+
+.list-group-button {
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.list-group-button > a {
+	margin-left: 5px;
+    display: flex;
+}
+
+.list-group-button a:hover {
+	text-decoration: none;
+}
+
+.list-group-button > form {
+    margin-left: 5px;
+}
+
+.list-group-button > i {
+    margin-left: 5px;
+}
+
+.list-group.inDashboard .list-group-item{
+	align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.list-group-item > i {
+	margin-right: 10px;
+}
+
+.list-group-button form input[type=submit] {
+	padding: 0;
+	border: none;
+	background: transparent;
+}
+
+.user_list {
+	display: block;
+    height: 55vh;
+    overflow-y: scroll;
+}
+
+tbody.users tr {
+	cursor: pointer;
+}
+
+.panel.panel-dashboard {
+	overflow: hidden;
+}
+
+.panel.panel-dashboard .panel-body {
+	max-height: 50vh;
+	overflow-y: auto;
+}
+
+.panel.panel-dashboard .panel-footer a.panel-call-to-action {
+	padding: 0;
+	margin: 0;
+	background-color: blue
+}
+
+.panel-primary {
+	border-color: #FF5722;
+}
+
+.panel-primary>.panel-heading {
+	background-color: #FF5722;
+	border-color: #FF5722;
+}
