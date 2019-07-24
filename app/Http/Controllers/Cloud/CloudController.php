@@ -29,9 +29,9 @@ class CloudController extends Controller
      */
     public function store(Request $request)
     {
-    	$this->validate($request, [
-    		'files' => 'required',
-		]);
+        $this->validate($request, [
+            'files' => 'required',
+        ]);
 
         $files = $request->file('files');
 
@@ -40,6 +40,7 @@ class CloudController extends Controller
             // Include file extensions
             include 'libs/file_extensions.php';
 
+            // Assert file type
             if (isset($imageExtensions[$file->extension()])) {
                 $type = 'image';
             } else if (isset($compressedFileExtensions[$file->extension()])) {
@@ -54,22 +55,25 @@ class CloudController extends Controller
                 $type = 'not_supported' . $file->extension();
             }
 
-            $original_name = $file->getClientOriginalName();
-
             $newFile = new File([
-            	'user_id' => Auth::user()->id,
-            	'name' => $original_name,
-            	'path' => $file->storeAs('files/'. Auth::user()->id, $original_name),
+                'user_id' => Auth::user()->id,
+                'name' => $file->getClientOriginalName(),
+                'path' => $file->storeAs('/files/' . Auth::user()->id, $file->hashName()),
                 'type' => $type,
                 'public' => false,
             ]);
 
-            // add file to the database and upload it
+            // Encrypt file
+            $encryptedFile = Crypt::encrypt(Storage::get($newFile->path));
+            Storage::put($newFile->path, $encryptedFile);
+
+            // Add file to the database
             $newFile->addFile($newFile);
-            Log::info('File: '. $newFile->name . '(' . $newFile->id . ') was added by user: ' . Auth::user()->name. '(' . Auth::user()->id . ')');
+
+            Log::info('File: '. $newFile->name . '(' . $newFile->id . ') was added by user: ' . Auth::user()->name. '(' . Auth::user()->id . ') as' . $file->hashName());
         }
 
-    	return back();
+        return back();
     }
 
     /**
