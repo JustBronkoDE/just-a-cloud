@@ -87,13 +87,17 @@ class CloudController extends Controller
 
         //Check if a user is logged in
         if (Auth::user()) {
+
             //Is the logged in user also the owner?
             $owner = Auth::user()->id === $file->user_id;
         }
         
         //Make file available for owner and if set, for the public.
         if ($file->public || $owner) {
-            Storage::copy($file->path, 'temp/' . $file->name);
+
+            // Decrypt file and copy it to temp folder
+            $decryptedFile = Crypt::decrypt(Storage::get($file->path));
+            Storage::put('temp/' . $file->name, $decryptedFile);
 
             Log::info(Auth::user()->name.'('. Auth::user()->id .') '. 'downloaded a file with an id of ' . $file->id . ' named ' . $file->name);
 
