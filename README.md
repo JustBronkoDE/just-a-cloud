@@ -29,7 +29,14 @@ First clone the repository:
 git clone https://github.com/JustBronkoDE/ProductiveCloud.git
 ```
 
-#### 2. Add the DB credentials & App config
+#### 2. Install dependencies
+
+To install the dependencies run the following command:
+```
+composer install
+```
+
+#### 3. Add the DB credentials & App config
 
 Next make sure to create a new database and add your database credentials and application config to your .env file:
 
@@ -49,7 +56,7 @@ DB_USERNAME=db_user
 DB_PASSWORD=db_password  
 ```
 
-#### 3. Migrate Database
+#### 4. Migrate Database
 
 Now you need to migrate the database, you have to run the following command  in the root directory:
 
@@ -57,7 +64,7 @@ Now you need to migrate the database, you have to run the following command  in 
 php artisan migrate
 ```
 
-#### 3. That's it!
+#### 5. That's it!
 
 Have fun! 
 
@@ -93,13 +100,6 @@ sudo chgrp -R www-data storage bootstrap/cache
 sudo chmod -R ug+rwx storage bootstrap/cache
 ```
 Now, you're secure and your website works, AND you can work with the files fairly easily. Alternatively you can set the webserver as owner, but this may give you problems using e.g FTP. Because u cant properly upload or work with files. You can fix this by adding your user to the webserver group.
-
-### If you are using composer and have problems with the *php artisan* command:
-
-Try running the following command:
-```
-composer update
-```
 
 ## Built With
 
